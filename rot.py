@@ -20,7 +20,8 @@ class Rot47(Rot):
     def __init__(self) -> None:
         self._shift: int = 47
         self._type: str = "rot" + str(self._shift)
-        self._encoded = ""
+        self._encoded = None
+        self._decoded = None
 
     def encode(self, text_to_encode: str) -> str:
         text_to_encode = text_to_encode.lower()
@@ -33,7 +34,13 @@ class Rot47(Rot):
         return self._encoded
 
     def decode(self, text_to_decode: str):
-        pass
+        text_to_decode = text_to_decode.lower()
+        for char in text_to_decode:
+            if char in string.ascii_lowercase:
+                new_char = ord(char) - self._shift
+                if new_char < 97:
+                    new_char = 123 - (97 - new_char)
+            self._decoded += new_char
 
     def rot_type(self) -> None:
         print(f"Rot type is: {self._type}")
@@ -43,7 +50,8 @@ class Rot13(Rot):
     def __init__(self) -> None:
         self._shift: int = 13
         self._type: str = "rot" + str(self._shift)
-        self._encoded = ""
+        self._encoded = None
+        self._decoded = None
 
     def encode(self, text_to_encode: str) -> str:
         text_to_encode = text_to_encode.lower()
@@ -56,7 +64,13 @@ class Rot13(Rot):
         return self._encoded
 
     def decode(self, text_to_decode: str):
-        pass
+        text_to_decode = text_to_decode.lower()
+        for char in text_to_decode:
+            if char in string.ascii_lowercase:
+                new_char = ord(char) - self._shift
+                if new_char < 97:
+                    new_char = 123 - (97 - new_char)
+            self._decoded += new_char
 
     def rot_type(self) -> None:
         print(f"Rot type is: {self._type}")
