@@ -1,5 +1,6 @@
 from menu import Menu
 from rot import RotManager
+import buffer
 
 
 class Manager:
@@ -9,9 +10,9 @@ class Manager:
         self.__menu = Menu()
         self.__rot_manager = RotManager()
         self.__options = {5: self.__end_app,
-                          # 4: "check buffer",
+                          # 4: "save to file",
                           # 3: "load from file",
-                          # 2: "save to file",
+                          2: buffer.my_buffer.run_buffer,
                           1: self.__rot_manager.start,
                           }
 
@@ -22,8 +23,8 @@ class Manager:
             self.execute(choice=self.__option)
 
     def choose_option(self) -> None:
-        self.__option = int(input("Enter number of option: "))
-        print(f"You choose {self.__option}")
+        self.__option = int(input("Enter number of option: \n"))
+        print(f"You choose {self.__option}\n")
 
     def execute(self, choice: int) -> None:
         self.__options.get(choice, "INVALID OPTION")()
