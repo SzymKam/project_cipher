@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import string
+import buffer
 
 
 class Rot(ABC):
@@ -90,11 +91,13 @@ class RotFactory:
 class RotManager(RotFactory):
 
     def __init__(self) -> None:
+        self.result = None
         self.done = None
         self.__selected_method = None
         self.__choose = None
         self.__working_rot = None
         self.__text: str = ""
+        # self.my_buffer = buffer.Buffer
 
     def start(self) -> None:
         self.menu()
@@ -102,8 +105,8 @@ class RotManager(RotFactory):
         self.input_text()
         self.__working_rot = self.get_rot(shift=self.__choose)
         self.choose_method()
-        result = self.encrypt(method=self.__selected_method)
-        print(result)
+        self.result = self.encrypt(method=self.__selected_method)
+        buffer.my_buffer.add_to_buffer(self.result)
 
     @staticmethod
     def menu() -> None:
