@@ -8,5 +8,5 @@ class Menu:
               "2. Check buffer \n"
               "3. Load text from file \n"
               "4. Save buffer to file \n"
-              "5. Exit program")
+              "5. Exit program\n")
 
