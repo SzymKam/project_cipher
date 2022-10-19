@@ -116,16 +116,16 @@ class RotManager(RotFactory):
               "For use Cezar cipher 47 - enter 47\n")
 
     def choose_cipher(self) -> None:
-        self.__choose = input("What type of cipher do you want? ")
-        print(f"You choose Cipher{self.__choose}")
+        self.__choose = input("What type of cipher do you want? \n")
+        print(f"You choose Cipher{self.__choose}\n")
 
     def input_text(self) -> None:
-        self.__text = input("Enter text: ")
+        self.__text = input("Enter text: \n")
 
     def choose_method(self) -> None:
         print("If you want encode enter: 1 \n"
               "If you want decode enter: 2 \n")
-        self.__selected_method = int(input("Do you want do decode or encode? "))
+        self.__selected_method = int(input("Do you want do decode or encode? \n"))
 
     def encrypt(self, method: int) -> dict:
         if method == 1:
