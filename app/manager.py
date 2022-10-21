@@ -1,18 +1,20 @@
 from menu import Menu
 from rot import RotManager
-import buffer
+from buffer import Buffer
 
 
 class Manager:
     def __init__(self) -> None:
         self.__option = None
         self.__is_running = True
+        self.buffer = Buffer()
         self.__menu = Menu()
         self.__rot_manager = RotManager()
         self.__options = {5: self.__end_app,
                           # 4: "save to file",
                           # 3: "load from file",
-                          2: buffer.my_buffer.run_buffer,
+                          3: self.buffer.show_buffer,
+                          2: self.buffer.clear_buffer,
                           1: self.__rot_manager.start,
                           }
 
