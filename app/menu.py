@@ -2,11 +2,7 @@
 class Menu:
     @staticmethod
     def print_main_menu():
-        print("Welcome to main menu of Cezar cipher program\n "
-              "Choose an option:\n"
+        print("MAIN MENU: \n"
               "1. Encode / decode \n"
-              "2. Check buffer \n"
-              "3. Load text from file \n"
-              "4. Save buffer to file \n"
+              "2. Buffer options \n"
               "5. Exit program\n")
-
