@@ -5,4 +5,5 @@ class Menu:
         print("MAIN MENU: \n"
               "1. Encode / decode \n"
               "2. Buffer options \n"
-              "5. Exit program\n")
+              "3. Filehandler options\n"
+              "4. Exit program\n")
