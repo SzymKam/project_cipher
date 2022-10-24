@@ -1,6 +1,7 @@
 from menu import Menu
 from rot import RotManager
 from buffer import BufferManager
+from file_handler import FilehandlerManager
 
 
 class Manager:
@@ -8,12 +9,14 @@ class Manager:
         self.__option = None
         self.__is_running = True
         self.__menu = Menu()
-        self.__buffer_start = BufferManager()
+        self.__buffer_manager = BufferManager()
         self.__rot_manager = RotManager()
-        self.__options = {5: self.__end_app,
-                          # 4: "save to file",
-                          2: self.__buffer_start.buffer_run,
-                          1: self.__rot_manager.rot_run,
+        self.__filehandler_manager = FilehandlerManager()
+        self.__options = {
+                            4: self.__end_app,
+                            3: self.__filehandler_manager.filehandler_run,
+                            2: self.__buffer_manager.buffer_run,
+                            1: self.__rot_manager.rot_run,
                           }
 
     def run(self) -> None:
