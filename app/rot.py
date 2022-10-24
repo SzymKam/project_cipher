@@ -118,7 +118,7 @@ class RotManager(RotFactory):
               "For encrypt text in Rot47 enter - 3 \n"
               "For decrypt text in Rot47 enter - 4 \n")
 
-    def rot_working(self, decision: str):
+    def rot_working(self, decision: str) -> None:
         if decision in ["1", "2", "3", "4"]:
             print(f"You choose option {self.__option}")
             self.__text = input("Enter text: \n")
@@ -126,7 +126,7 @@ class RotManager(RotFactory):
         else:
             print("Invalid Value")
 
-    def make_coding(self, decision: str):
+    def make_coding(self, decision: str) -> None:
         if decision == "1" or decision == "2":
             self.__code = self.get_rot(shift="13")
             if decision == "1":
