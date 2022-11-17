@@ -1,7 +1,8 @@
-from buffer import Buffer
-
+from typing import Optional
 import json
 import os
+
+from buffer import Buffer
 
 
 class FilehandlerManager:
@@ -46,9 +47,8 @@ class FilehandlerManager:
             self.save(filename=self.__file_name, save_option=self.__write_option)
 
     @staticmethod
-    def save(filename: str, save_option: str):
-        with open(f"files/{filename}.json", save_option) as new_file:
-            # x = json.load(new_file)
+    def save(filename: str, save_option: str, directory: Optional[str] = 'files/'):
+        with open(f"{directory}{filename}.json", save_option) as new_file:
             json.dump(Buffer.buffer_to_dict(), new_file)
             print(f"Buffer saved as {filename}.json")
 
@@ -76,7 +76,3 @@ class FilehandlerManager:
               "Save buffer to exist file - 2 \n"
               "Load file to buffer - 3\n"
               "Check save files - 4\n")
-
-#
-# test = FilehandlerManager()
-# test.filehandler_run()

@@ -1,4 +1,3 @@
-
 class Menu:
     @staticmethod
     def print_main_menu():

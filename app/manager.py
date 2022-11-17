@@ -32,5 +32,6 @@ class Manager:
             print("Invalid option.")
 
     def __end_app(self) -> None:
-        print("Program shutting down.\n")
+        print("Program shutting down.")
         self.__is_running = False
+
