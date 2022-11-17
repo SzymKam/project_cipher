@@ -22,11 +22,14 @@ class TestBufferOptions:
         buffer.Buffer.clear_buffer()
         assert buffer.Buffer.program_buffer == []
 
-    def test_if_show_buffer_print_correct_text(self, manager_test):
-        assert buffer.Buffer.show_buffer() == print(f"Element number: 1 \n"
-                                                    f"Text: This is test text \n"
-                                                    f"Status: This is test status \n"
-                                                    f"Rot type: This is test rot type \n")
+    def test_if_show_buffer_print_correct_text(self, manager_test, capsys):
+        buffer.Buffer.show_buffer()
+        captured = capsys.readouterr()
+        assert captured.out == f"Element number: 1 \n"\
+                               f"Text: This is test text \n"\
+                               f"Status: This is test status \n" \
+                               f"Rot type: This is test rot type \n" \
+                               f"\n"
 
     def test_if_buffer_to_dict_return_right_value(self, manager_test):
         assert buffer.Buffer.buffer_to_dict() == {"element: 1": {"text": "This is test text",
@@ -39,7 +42,7 @@ class TestBufferOptions:
                                             "status": "This is test status",
                                             "rot_type": "This is test rot type"
                                             }}
-        assert type(buffer.Buffer.dict_to_buffer(dict_to_add=test_program_dict)) == type(TextElements(
-                                                                                        text="This is test text",
-                                                                                        status="This is test status",
-                                                                                        rot_type="This is test rot type"))
+        assert buffer.Buffer.dict_to_buffer(dict_to_add=test_program_dict) == \
+               TextElements(text="This is test text",
+                            status="This is test status",
+                            rot_type="This is test rot type")

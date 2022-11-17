@@ -1,17 +1,5 @@
 import pytest
-from rot import Rot, Rot13, Rot47, RotFactory, RotManager
-
-
-# class TestRotClass:
-#
-#     @pytest.fixture
-#     def setup_test(self):
-#         self.text = "text_for_test"
-#         self.rot_class = Rot()
-#
-#     def test_if_abs_method_encode_return_not_implemented_error(self, setup_test):
-#         with pytest.raises(NotImplementedError):
-#             self.rot_class.encode(text=self.text)
+from rot import Rot13, Rot47, RotFactory, RotManager
 
 
 class TestRot47AndRot13Class:
@@ -54,14 +42,14 @@ class TestRotFactoryClass:
 
 
 class TestRotManager:
-    def test_if_rot_menu_print_right_text(self):
-        assert RotManager.rot_menu() == print("ROT MENU: \n"
-                                              "For encrypt own text in Rot13 enter - 1 \n"
-                                              "For decrypt own text in Rot13 enter - 2 \n"
-                                              "For encrypt own text in Rot47 enter - 3 \n"
-                                              "For decrypt own text in Rot47 enter - 4 \n"
-                                              "For use element from buffer enter - 5\n")
+    def test_if_rot_menu_print_right_text(self, capsys):
+        RotManager.rot_menu()
+        captured = capsys.readouterr()
+        assert captured.out == "ROT MENU: \n" \
+                               "For encrypt own text in Rot13 enter - 1 \n" \
+                               "For decrypt own text in Rot13 enter - 2 \n" \
+                               "For encrypt own text in Rot47 enter - 3 \n" \
+                               "For decrypt own text in Rot47 enter - 4 \n" \
+                               "For use element from buffer enter - 5\n" \
+                               "\n"
 
-    # def test_rot_working_with_numbers_1_to_4(self):
-    #     rot_manager = RotManager()
-    #     assert rot_manager.rot_working('1') == print('You choose option 1')
