@@ -1,4 +1,5 @@
 from buffer import Buffer
+
 import json
 import os
 
@@ -47,6 +48,7 @@ class FilehandlerManager:
     @staticmethod
     def save(filename: str, save_option: str):
         with open(f"files/{filename}.json", save_option) as new_file:
+            # x = json.load(new_file)
             json.dump(Buffer.buffer_to_dict(), new_file)
             print(f"Buffer saved as {filename}.json")
 
