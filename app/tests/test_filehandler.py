@@ -14,8 +14,10 @@ class TestFilehandler:
     # def teardown_method(self):
     #     os.rmdir(app.temporary_dir.test_file.json)
 
-    def test_if_make_decision_print_invalid_option_with_choice_out_of_range(self, setup_test):
-        assert self.test_filehandler_manager.make_decision(choice='some_option') == print("Invalid option")
+    def test_if_make_decision_print_invalid_option_with_choice_out_of_range(self, setup_test, capsys):
+        self.test_filehandler_manager.make_decision(choice='some_option')
+        capture = capsys.readouterr()
+        assert capture.out == "Invalid option\n"
 
     def test_if_save_return_right_value(self, mocker, setup_test):
         mocker.patch(buffer.Buffer, 'program_buffer', TextElements(text="test_text",
