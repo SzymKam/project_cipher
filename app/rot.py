@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import string
 from buffer import Buffer
-from text import Text
+from text import TextElements
 
 
 class Rot(ABC):
@@ -95,8 +95,7 @@ class RotFactory:
             return Rot13()
 
 
-class RotManager(RotFactory):
-
+class RotManager:
     def __init__(self) -> None:
         self.__result = None
         self.__code = None
@@ -113,33 +112,50 @@ class RotManager(RotFactory):
     @staticmethod
     def rot_menu() -> None:
         print("ROT MENU: \n"
-              "For encrypt text in Rot13 enter - 1 \n"
-              "For decrypt text in Rot13 enter - 2 \n"
-              "For encrypt text in Rot47 enter - 3 \n"
-              "For decrypt text in Rot47 enter - 4 \n")
+              "For encrypt own text in Rot13 enter - 1 \n"
+              "For decrypt own text in Rot13 enter - 2 \n"
+              "For encrypt own text in Rot47 enter - 3 \n"
+              "For decrypt own text in Rot47 enter - 4 \n"
+              "For use element from buffer enter - 5\n")
 
     def rot_working(self, decision: str) -> None:
-        if decision in ["1", "2", "3", "4"]:
+        if decision in ("1", "2", "3", "4"):
             print(f"You choose option {self.__option}")
             self.__text = input("Enter text: \n")
             self.make_coding(decision=decision)
+        # added option load form buffer
+        elif decision == "5":
+            if Buffer.program_buffer:
+                print("Buffer elements:")
+                Buffer.show_buffer()
+                buffer_choice = int(input("Enter number you want to choose: ")) - 1  # add limit for len of buffer
+                buffer_element = Buffer.program_buffer[buffer_choice]
+                self.__text = buffer_element.return_text()
+                print("For encrypt in Rot13 enter - 1 \n"
+                      "For decrypt in Rot13 enter - 2 \n"
+                      "For encrypt in Rot47 enter - 3 \n"
+                      "For decrypt in Rot47 enter - 4 \n")
+                self.__option = input("Which rot you want to use? ")  # add limit for 4 options
+                self.make_coding(decision=self.__option)
+            else:
+                print("Buffer is empty")
         else:
             print("Invalid Value")
 
     def make_coding(self, decision: str) -> None:
-        if decision == "1" or decision == "2":
-            self.__code = self.get_rot(shift="13")
+        if int(decision) in range(1, 2):
+            self.__code = RotFactory.get_rot(shift="13")
             if decision == "1":
                 self.__result = (self.__code.encode(self.__text))
             elif decision == "2":
                 self.__result = self.__code.decode(self.__text)
         elif decision == "3" or decision == "4":
-            self.__code = self.get_rot(shift="47")
+            self.__code = RotFactory.get_rot(shift="47")
             if decision == "3":
                 self.__result = self.__code.encode(self.__text)
             elif decision == "4":
                 self.__result = self.__code.decode(self.__text)
         print("Task done")
 
-    def text_return(self) -> Text:
-        return Text(text=self.__result[0], status=self.__result[1], rot_type=self.__code.rot_type())
+    def text_return(self) -> TextElements:
+        return TextElements(text=self.__result[0], status=self.__result[1], rot_type=self.__code.rot_type())
