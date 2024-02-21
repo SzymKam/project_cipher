@@ -11,9 +11,6 @@ class TestFilehandler:
     def setup_test(self):
         self.test_filehandler_manager = FilehandlerManager()
 
-    # def teardown_method(self):
-    #     os.rmdir(app.temporary_dir.test_file.json)
-
     def test_if_make_decision_print_invalid_option_with_choice_out_of_range(self, setup_test, capsys):
         self.test_filehandler_manager.make_decision(choice='some_option')
         capture = capsys.readouterr()
